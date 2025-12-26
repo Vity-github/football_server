@@ -14,8 +14,11 @@
   "author": "zykee",
   "license": "ISC",
   "dependencies": {
+    "ioredis": "^5.8.2",
     "koa": "^3.1.1",
-    "koa-bodyparser": "^4.4.1"
+    "koa-bodyparser": "^4.4.1",
+    "mysql2": "^3.16.0",
+    "sequelize": "^6.37.7"
   },
   "devDependencies": {
     "@koa/router": "^15.1.1",

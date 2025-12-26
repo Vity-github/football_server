@@ -1,43 +1,53 @@
 import Router from "@koa/router";
 import { Context } from "koa";
 import { checkBody, checkToken } from "../middlewares/dataCheck";
-import { checkLoginBody, checkRegisterBody } from "./auth.check";
-import { ILoginReq, IRegisterReq } from "./auth.type";
+import { checkUserWithoutIdAndNameDto } from "./auth.check";
+import { UserWithoutIdAndNameDto } from "../dtos/User";
 import { catchError, generateOk } from "../libs/check";
-import * as userKit from "../kits/user";
+import * as UserService from "../services/user";
+import { redis } from "../index";
 
 const router = new Router({
   prefix: "/api/auth",
 });
 
 // 用户注册
-router.post("/register", checkBody(checkRegisterBody), async (ctx: Context) => {
-  try {
-    const { account, pwd } = ctx.request.body as IRegisterReq;
-    const id = await userKit.createUser(account, pwd);
-    ctx.body = generateOk({ id });
-  } catch (err) {
-    catchError(err, ctx);
+router.post(
+  "/register",
+  checkBody(checkUserWithoutIdAndNameDto),
+  async (ctx: Context) => {
+    try {
+      const req = ctx.request.body as UserWithoutIdAndNameDto;
+      const id = await UserService.createUser(req);
+      ctx.body = generateOk(id);
+    } catch (err) {
+      catchError(err, ctx);
+    }
   }
-});
+);
 
 // 用户登录
-router.post("/login", checkBody(checkLoginBody), async (ctx: Context) => {
-  try {
-    const { account, pwd } = ctx.request.body as ILoginReq;
-    const token = await userKit.login(account, pwd);
-    ctx.cookies.set("token", token);
-    ctx.body = generateOk();
-  } catch (err) {
-    catchError(err, ctx);
+router.post(
+  "/login",
+  checkBody(checkUserWithoutIdAndNameDto),
+  async (ctx: Context) => {
+    try {
+      const req = ctx.request.body as UserWithoutIdAndNameDto;
+      const token = await UserService.login(req);
+      await redis.set(`session:${token}`, "1");
+      ctx.cookies.set("token", token);
+      ctx.body = generateOk();
+    } catch (err) {
+      catchError(err, ctx);
+    }
   }
-});
+);
 
 // 用户登出
-router.post("/logout", checkToken(userKit.checkToken), (ctx: Context) => {
+router.post("/logout", checkToken(UserService.checkToken), (ctx: Context) => {
   try {
     const token = ctx.cookies.get("token");
-    userKit.logout(token);
+    UserService.logout(token);
     ctx.cookies.set("token", "");
     ctx.body = generateOk();
   } catch (err) {
