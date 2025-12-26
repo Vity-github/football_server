@@ -1,7 +1,4 @@
-/**
- * 基础用户 DTO - 包含所有字段
- * 用于内部传递完整用户数据
- */
+// 完整基础用户DTO
 export interface UserDto {
   id: number;
   name: string;
@@ -9,8 +6,8 @@ export interface UserDto {
   password: string;
 }
 
-// 创建用户 DTO - 不包含 id
+// 用户DTO - 不包含 id
 export type UserWithoutIdDto = Omit<UserDto, "id">;
 
-// 创建用户 DTO - 不包含 id，name
+// 用户DTO - 不包含 id，name
 export type UserWithoutIdAndNameDto = Omit<UserWithoutIdDto, "name">;
