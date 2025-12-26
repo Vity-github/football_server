@@ -1,32 +1,29 @@
 import { Context } from "koa";
-import { Exception } from "./exception";
-
 export class Error {
   stat: string;
   msg: string;
-  constructor(stat: string) {
-    this.stat = stat || "Internel_Server_Error";
-    this.msg = Exception.get(stat);
+  constructor(stat: string, msg: string) {
+    this.stat = stat;
+    this.msg = msg;
   }
 }
 
-export function check(bool: boolean, stat?: string) {
+// 空校验
+export function nullCheck(bool: boolean, msg: string) {
   if (!bool) {
-    throw new Error(stat);
+    throw new Error("PARAMS_LOST", msg);
   }
 }
 
-export function catchError(err: typeof Error, ctx: Context) {
+export function catchError(err: Error, ctx: Context) {
   console.log("error: ", err);
-  ctx.status = 500;
-  ctx.body = { ...err };
+  ctx.body = { stat: err.stat, msg: err.msg };
 }
 
 export function generateOk<T>(data?: T) {
-  return data
-    ? {
-        stat: "ok",
-        data,
-      }
-    : { stat: "ok" };
+  return {
+    stat: "SUCCESS",
+    msg: "ok",
+    data,
+  };
 }

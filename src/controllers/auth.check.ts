@@ -1,12 +1,12 @@
-import { check } from "../libs/check";
-import { IRegisterReq } from "../types/request";
+import { nullCheck } from "../libs/check";
+import { IRegisterReq } from "./auth.type";
 
 export function checkRegisterBody({ account, pwd }: IRegisterReq) {
-  check(!!account, "ERR_PARAMS_LOST");
-  check(!!pwd, "ERR_PARAMS_LOST");
+  nullCheck(!!account, "账户名称不能为空");
+  nullCheck(!!pwd, "密码不能为空");
 }
 
 export function checkLoginBody({ account, pwd }: IRegisterReq) {
-  check(!!account, "ERR_PARAMS_LOST");
-  check(!!pwd, "ERR_PARAMS_LOST");
+  nullCheck(!!account, "ERR_PARAMS_LOST");
+  nullCheck(!!pwd, "ERR_PARAMS_LOST");
 }

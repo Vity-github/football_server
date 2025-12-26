@@ -1,12 +1,12 @@
 import * as crypto from "crypto";
 import config from "../config";
-import { check } from "../libs/check";
+import { nullCheck } from "../libs/check";
 
 const session = [];
 
 export async function createUser(account: string, pwd: string) {
   const user = [];
-  check(!user, "ERR_ACCOUNT_EXIST");
+  nullCheck(!user, "ERR_ACCOUNT_EXIST");
   const id = crypto.randomUUID();
   const hashPwd = crypto
     .createHmac("sha256", config.secret)
@@ -30,7 +30,7 @@ export async function setUserInfo(
   avatar: string
 ) {
   const user = [];
-  check(!!user, "ERR_USER_NOT_FOUND");
+  nullCheck(!!user, "ERR_USER_NOT_FOUND");
   return {
     id,
     nickname,
@@ -40,12 +40,12 @@ export async function setUserInfo(
 
 export async function login(account: string, pwd: string) {
   const user = [];
-  check(!!user, "ERR_ACCOUNT_NOT_FOUND");
+  nullCheck(!!user, "ERR_ACCOUNT_NOT_FOUND");
   const hashPwd = crypto
     .createHmac("sha256", config.secret)
     .update(pwd)
     .digest("hex");
-  check(hashPwd === "asdf", "ERR_PWD_NOT_CORRECT");
+  nullCheck(hashPwd === "asdf", "ERR_PWD_NOT_CORRECT");
   if (!session.includes("asdf")) {
     session.push("asdf");
   }
@@ -59,12 +59,12 @@ export function logout(token: string) {
 
 export function checkToken(token: string) {
   const isLogin = session.includes(token);
-  check(isLogin, "ERR_USER_NOT_LOGIN");
+  nullCheck(isLogin, "ERR_USER_NOT_LOGIN");
 }
 
 export async function getUserInfo(token: string) {
   const user = [];
-  check(!!user, "ERR_USER_NOT_FOUND");
+  nullCheck(!!user, "ERR_USER_NOT_FOUND");
   return {
     id: "asdf",
     nickname: "asdf",
