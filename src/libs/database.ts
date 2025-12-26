@@ -12,7 +12,7 @@ const sequelize = new Sequelize(
     dialect: config.database.dialect as Dialect,
     pool: config.database.pool,
     logging: logger.info, // 开发环境可以开启日志，生产环境设为 false
-  }
+  },
 );
 
 export default sequelize;

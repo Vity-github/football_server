@@ -11,18 +11,18 @@ export class Error {
 }
 
 // 空校验
-export function nullCheck(bool: boolean, msg: string) {
+export function nullCheck(bool: boolean, msg: string): void {
   if (!bool) {
     throw new Error('PARAMS_LOST', msg);
   }
 }
 
-export function catchError(err: Error, ctx: Context) {
+export function catchError(err: Error, ctx: Context): void {
   logger.error('error: ', err);
   ctx.body = { stat: err.stat, msg: err.msg };
 }
 
-export function generateOk<T>(data?: T) {
+export function generateOk<T>(data?: T): { stat: string; msg: string; data?: T } {
   return {
     stat: 'SUCCESS',
     msg: 'ok',
