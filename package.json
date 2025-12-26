@@ -1,0 +1,29 @@
+{
+  "name": "form-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon",
+    "test": "npx mocha",
+    "dev": "npx tsc -w",
+    "serve": "npx nodemon ./dist/index",
+    "build": "npx tsc"
+  },
+  "keywords": [],
+  "author": "zykee",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^3.1.1",
+    "koa-bodyparser": "^4.4.1"
+  },
+  "devDependencies": {
+    "@koa/router": "^15.1.1",
+    "@types/koa": "^3.0.1",
+    "@types/koa-bodyparser": "^4.3.13",
+    "nodemon": "^3.1.11",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.3"
+  }
+}
