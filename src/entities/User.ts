@@ -1,5 +1,5 @@
-import { DataTypes, Model } from "sequelize";
-import sequelize from "../libs/database";
+import { DataTypes, Model } from 'sequelize';
+import sequelize from '../libs/database';
 
 interface UserEntity {
   id: number;
@@ -38,7 +38,7 @@ User.init(
   },
   {
     sequelize,
-    tableName: "t_user",
+    tableName: 't_user',
     timestamps: false, // 因为你自己管理 ctime 和 utime
   }
 );

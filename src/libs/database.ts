@@ -1,5 +1,6 @@
-import { Dialect, Sequelize } from "sequelize";
-import config from "../config";
+import { Dialect, Sequelize } from 'sequelize';
+import config from '../config';
+import { logger } from './logger';
 
 const sequelize = new Sequelize(
   config.database.database,
@@ -10,7 +11,7 @@ const sequelize = new Sequelize(
     port: config.database.port,
     dialect: config.database.dialect as Dialect,
     pool: config.database.pool,
-    logging: console.log, // 开发环境可以开启日志，生产环境设为 false
+    logging: logger.info, // 开发环境可以开启日志，生产环境设为 false
   }
 );
 

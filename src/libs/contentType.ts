@@ -342,4 +342,4 @@ export const ContentType = new Map([
   ['.ipa', 'application/vnd.iphone'],
   ['.apk', 'application/vnd.android.package-archive'],
   ['.xap', 'application/x-silverlight-app'],
-])
+]);

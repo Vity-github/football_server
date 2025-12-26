@@ -1,5 +1,5 @@
-import User from "../entities/User";
-import { UserWithoutIdDto } from "../dtos/User";
+import User from '../entities/User';
+import { UserWithoutIdDto } from '../dtos/User';
 
 class UserRepository {
   // 创建用户、返回值为用户id

@@ -1,4 +1,4 @@
-import Stat from "../stat";
+import Stat from '../stat';
 const __stat = new Map<string, string>();
 export interface IStat {
   [key: string]: string;
@@ -26,4 +26,4 @@ export class Exception {
   }
 }
 Exception.updates(Stat);
-Exception.set("Internel_Server_Error", "服务端异常");
+Exception.set('Internel_Server_Error', '服务端异常');
