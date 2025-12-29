@@ -83,7 +83,6 @@ export default [
       'default-case': 'error', // 要求 switch 语句中有 default 分支
       'default-case-last': 'error', // 要求 default 分支在 switch 语句中最后出现
       'dot-notation': 'error', // 强制尽可能地使用点号
-      'guard-for-in': 'error', // 要求 for-in 循环中有一个 if 语句
       'no-caller': 'error', // 禁止使用 arguments.caller 或 arguments.callee
       'no-else-return': 'error', // 禁止 if 语句中 return 语句之后有 else 块
       'no-empty-function': 'error', // 禁止出现空函数

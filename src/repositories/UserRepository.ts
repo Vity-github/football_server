@@ -9,6 +9,7 @@ class UserRepository {
       account: createUserDto.account,
       password_hash: createUserDto.password,
     });
+
     return user.id;
   }
 }

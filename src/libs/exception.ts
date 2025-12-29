@@ -11,17 +11,17 @@ export class Exception {
     this.msg = msg;
   }
 
-  static updates(stats: IStat) {
+  static updates(stats: IStat): void {
     for (const key in stats) {
       __stat.set(key, stats[key]);
     }
   }
 
-  static get(stat: string) {
+  static get(stat: string): string | undefined {
     return __stat.get(stat);
   }
 
-  static set(key: string, stat: string) {
+  static set(key: string, stat: string): void {
     __stat.set(key, stat);
   }
 }
