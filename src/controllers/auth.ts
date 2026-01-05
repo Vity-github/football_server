@@ -17,7 +17,7 @@ router.post('/register', checkBody(checkUserWithoutIdAndNameDto), async (ctx: Co
     const id = await UserService.createUser(req);
     ctx.body = new ApiSuccessResponse<number>(id);
   } catch (err) {
-    ctx.body = new ApiErrorResponse(err.message);
+    ctx.body = new ApiErrorResponse(err.code, err.message);
   }
 });
 

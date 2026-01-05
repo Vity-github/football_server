@@ -1,6 +1,7 @@
 enum CODE {
   SUCCESS = 'SUCCESS',
   ERROR = 'ERROR',
+  PARAMS_LOST = 'PARAMS_LOST',
 }
 
 enum MSG {

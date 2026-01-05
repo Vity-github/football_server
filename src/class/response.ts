@@ -21,7 +21,7 @@ export class ApiSuccessResponse<T> extends ApiResponse<T> {
 
 // 错误返回体
 export class ApiErrorResponse extends ApiResponse<null> {
-  constructor(msg: MSG = MSG.ERROR) {
-    super(CODE.ERROR, msg);
+  constructor(code: CODE = CODE.ERROR, msg: MSG = MSG.ERROR) {
+    super(code, msg);
   }
 }
