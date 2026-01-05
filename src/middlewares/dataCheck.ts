@@ -1,6 +1,6 @@
 import { Context, Next } from 'koa';
-import { catchError } from '../libs/check';
 import { logger } from '../libs/logger';
+import { ApiErrorResponse } from '../class/response';
 
 // 检查token
 const checkToken = (check: (token: string) => void) => {
@@ -11,7 +11,7 @@ const checkToken = (check: (token: string) => void) => {
       check(token);
       await next();
     } catch (err) {
-      catchError(err, ctx);
+      ctx.body = new ApiErrorResponse(err.message);
     }
   };
 };
@@ -24,7 +24,7 @@ const checkBody = <T>(check: (body: T) => void) => {
       check(ctx.request.body as T);
       await next();
     } catch (err) {
-      catchError(err, ctx);
+      ctx.body = new ApiErrorResponse(err.message);
     }
   };
 };
@@ -37,7 +37,7 @@ const checkQuery = <T>(check: (body: T) => void) => {
       check(ctx.request.query as T);
       await next();
     } catch (err) {
-      catchError(err, ctx);
+      ctx.body = new ApiErrorResponse(err.message);
     }
   };
 };

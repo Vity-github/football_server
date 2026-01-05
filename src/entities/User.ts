@@ -1,12 +1,8 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../libs/database';
+import { UserDto } from '../dtos/User';
 
-interface UserEntity {
-  id: number;
-  name: string;
-  account: string;
-  password_hash: string;
-}
+type UserEntity = Omit<UserDto, 'password'> & { password_hash: string };
 
 class User extends Model<UserEntity> implements UserEntity {
   public id!: number;

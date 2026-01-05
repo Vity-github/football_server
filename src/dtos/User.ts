@@ -11,3 +11,4 @@ export type UserWithoutIdDto = Omit<UserDto, 'id'>;
 
 // 用户DTO - 不包含 id，name
 export type UserWithoutIdAndNameDto = Omit<UserWithoutIdDto, 'name'>;
+

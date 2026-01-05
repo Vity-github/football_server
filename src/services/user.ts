@@ -1,4 +1,3 @@
-import { nullCheck } from '../libs/check';
 import { UserWithoutIdAndNameDto } from '../dtos/User';
 import UserRepository from '../repositories/UserRepository';
 
@@ -22,7 +21,9 @@ const logout = (token: string): void => {
 
 const checkToken = (token: string): void => {
   const isLogin = session.includes(token);
-  nullCheck(isLogin, 'ERR_USER_NOT_LOGIN');
+  if (!isLogin) {
+    throw new Error('ERR_USER_NOT_LOGIN');
+  }
 };
 
 export { createUser, logout, checkToken };

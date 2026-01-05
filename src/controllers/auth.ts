@@ -3,7 +3,7 @@ import { Context } from 'koa';
 import { checkBody } from '../middlewares/dataCheck';
 import { checkUserWithoutIdAndNameDto } from './auth.check';
 import { UserWithoutIdAndNameDto } from '../dtos/User';
-import { catchError, generateOk } from '../libs/check';
+import { ApiErrorResponse, ApiSuccessResponse } from '../class/response';
 import * as UserService from '../services/user';
 
 const router = new Router({
@@ -15,9 +15,9 @@ router.post('/register', checkBody(checkUserWithoutIdAndNameDto), async (ctx: Co
   try {
     const req = ctx.request.body as UserWithoutIdAndNameDto;
     const id = await UserService.createUser(req);
-    ctx.body = generateOk(id);
+    ctx.body = new ApiSuccessResponse<number>(id);
   } catch (err) {
-    catchError(err, ctx);
+    ctx.body = new ApiErrorResponse(err.message);
   }
 });
 

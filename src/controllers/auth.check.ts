@@ -1,7 +1,12 @@
 import { UserWithoutIdAndNameDto } from 'src/dtos/User';
-import { nullCheck } from '../libs/check';
 
-export function checkUserWithoutIdAndNameDto({ account, password }: UserWithoutIdAndNameDto) {
-  nullCheck(!!account, '账户名称不能为空');
-  nullCheck(!!password, '密码不能为空');
-}
+const checkUserWithoutIdAndNameDto = ({ account, password }: UserWithoutIdAndNameDto): void => {
+  if (!account) {
+    throw new Error('PARAMS_LOST');
+  }
+  if (!password) {
+    throw new Error('PARAMS_LOST');
+  }
+};
+
+export { checkUserWithoutIdAndNameDto };
