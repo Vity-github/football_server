@@ -1,13 +1,13 @@
-import CustomError from 'src/class/error';
-import { UserWithoutIdAndNameDto } from 'src/dtos/User';
-import { CODE } from 'src/libs/stat';
+import { UserNameAndPasswordDto } from 'src/dtos/User';
+import { locale, t } from 'src/locale/locale';
 
-const checkUserWithoutIdAndNameDto = ({ account, password }: UserWithoutIdAndNameDto): void => {
+// 用户注册接口参数校验
+const checkUserWithoutIdAndNameDto = ({ account, password }: UserNameAndPasswordDto): void => {
   if (!account) {
-    throw new CustomError(CODE.PARAMS_LOST, '账号不能为空');
+    throw new Error(t(locale.AUTH.ACCOUNT_REQUIRED));
   }
   if (!password) {
-    throw new CustomError(CODE.PARAMS_LOST, '密码不能为空');
+    throw new Error(t(locale.AUTH.PASSWORD_REQUIRED));
   }
 };
 

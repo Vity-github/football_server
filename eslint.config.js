@@ -37,7 +37,6 @@ export default [
       'no-implied-eval': 'error', // 禁止使用隐式 eval（如 setTimeout('code')）
       'no-new-func': 'error', // 禁止使用 Function 构造函数，等同于 eval
       'no-script-url': 'error', // 禁止在链接中使用 javascript: URL
-      'no-void': 'error', // 禁止使用 void 操作符
       'no-with': 'error', // 禁止使用 with 语句，影响性能且难以理解
       'prefer-const': 'error', // 优先使用 const，如果变量从未重新赋值
       'no-var': 'error', // 禁止使用 var，优先使用 let 或 const
